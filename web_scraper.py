@@ -1,7 +1,5 @@
 #! python3
-import webbrowser, sys, requests, bs4, lxml, csv
-
-
+import requests, bs4, lxml
 
 # Gets url of reading order page and saves to page variable
 REQUEST_URL = 'https://comicbookreadingorders.com/dc/characters/batman-reading-order/'
@@ -15,13 +13,20 @@ text = soup.find_all('p')
 
 
 # Creates/opens text file to write to
-file = open("reading_order.txt", 'r+')
+file = open("reading_list.txt", 'w')
 
 # Loops through every <p> element and writes text to file. Also appends comma to
 # the end of each text element
 for t in text:
     file.write(t.text)
     file.write(", ")
+
+# Close File
+file.close()
+
+
+# Creates/opens text file to write to
+file = open("reading_list.txt", 'r')
 
 # Stores each line of file into comic_list
 comic_list = []
@@ -30,7 +35,7 @@ while True:
     comic_list.append(line)
     if not line: break
 
-# Close File So we can overwrite later
+# Close File
 file.close()
 
 
@@ -44,10 +49,10 @@ for index in range(len(comic_list)):
 csv_formatted_string = ''.join(comic_list)
 
 # Opens same file to overwrite with newly csv formatted data
-file = open("reading_order.txt", 'r+')
+file = open("reading_list.txt", 'w')
 
 # Rewrites file with csv string
 file.write(csv_formatted_string)
-print(csv_formatted_string)
+
 # Close File
 file.close()
