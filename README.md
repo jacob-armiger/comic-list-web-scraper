@@ -1,6 +1,6 @@
 # Comic List Reading Order Web Scraper
 This project uses a web scraper to gather a comic book list from https://comicbookreadingorders.com/ and formats the data into a valid csv file.
-You can upload the cvs file to Excel and make a checklist of comics you've read.
+You can upload the csv file to Excel and make a checklist of comics you've read.
 
 ## How-To
 1. Inside `webscraper.py`, change `REQUEST_URL` to the website you would like to scrape:
