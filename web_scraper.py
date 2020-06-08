@@ -67,13 +67,13 @@ def main():
     # URL to be scraped
     REQUEST_URL = 'https://comicbookreadingorders.com/dc/characters/batman-reading-order/'
 
-    # Gets comic book titles listed on URL
+    # Stores comic book titles listed on URL
     text = scrape(REQUEST_URL)
 
-    # Creates a list from the comic book titles scraped from URL
+    # Writes text to a text file and creates a list from the entries in the text file
     comic_list = create_list(text)
 
-    # Overwrites reading_list text file with relevant and better formatted entries
+    # Overwrites text file with more relevant and better formatted entries
     clean(comic_list)
 
 if __name__ == "__main__":
