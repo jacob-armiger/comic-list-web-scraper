@@ -51,8 +51,34 @@ def clean(comic_list):
     for index in range(len(comic_list)):
         comic_list[index] = comic_list[index].replace('\n',',')
 
-    # Joins comic_list into one string, each entry separated by a comma
-    csv_formatted_string = ''.join(comic_list)
+    # Joins comic_list into one string
+    comic_list_string = ''.join(comic_list)
+
+    # Splits the string at every comma. Now almost all comic titles will be 
+    # separated into individual elements into list.
+    comic_list = comic_list_string.split(',')
+
+    # Pass over five times due to skipping NEEDS FIX
+    for num in range(15):
+        for elem in comic_list:
+
+            # Sets keep variable for entry
+            for c in elem:
+                if((c == '#') or (c == '(')):
+                    keep = 'y'
+                    break
+                else:
+                    keep = 'n'
+            
+            # Removes entry if:
+            # keep is set to 'n' AND "here." is not found,
+            # OR "First Appearance:" is found...
+            if(((keep == 'n') and (elem.find("here.") == -1)) or (elem.find("First Appearance:") != -1) or (elem.find("everywhere. In his") != -1)):
+                comic_list.remove(elem)
+
+    # Re-join comic_list elements separated by a comma. This allows us to create
+    # csv file.
+    csv_formatted_string = ','.join(comic_list)
 
     # Opens file to overwrite with newly csv formatted data
     file = open("reading_list.txt", 'w')
@@ -65,7 +91,7 @@ def clean(comic_list):
 
 def main():
     # URL to be scraped
-    REQUEST_URL = 'https://comicbookreadingorders.com/dc/characters/batman-reading-order/'
+    REQUEST_URL = 'https://comicbookreadingorders.com/dc/event-timeline/'
 
     # Stores comic book titles listed on URL
     text = scrape(REQUEST_URL)
