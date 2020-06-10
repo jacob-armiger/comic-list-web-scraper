@@ -13,4 +13,4 @@ page = requests.get(REQUEST_URL)
 
 ### Notes
 - You may need to transform data in Excel, or more specifically transpose it from horizontal to vertical. There are options for this when uploading the CSV file to excel.
-- There is often excess text at the beginning or end of the CSV file. You can get rid of that by simply deleting the rows they are in within the Excel sheet.
+- There may be excess text at the beginning or end of the CSV file, but a text filter has been implemented to minimize this issue. However, if you still see this kind of text you can get rid of it by simply deleting the rows they are in within the Excel sheet.
