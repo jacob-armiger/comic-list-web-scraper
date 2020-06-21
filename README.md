@@ -21,5 +21,5 @@ page = requests.get(REQUEST_URL)
 - There may be excess text at the beginning or end of the CSV file, but a text filter has been implemented to minimize this issue. However, if you still see this kind of text you can get rid of it by simply deleting the rows they are in within the Excel sheet.
 
 ### Links
-Project Roadmap: https://www.notion.so/22b8dc0bab7f46c183e07cfa0e3ce44c?v=837177e6ad6145149178cc398942bd3d <br>
-Wiki: https://github.com/jacob-armiger/comic-list-web-scraper/wiki
+[Project Roadmap](https://www.notion.so/22b8dc0bab7f46c183e07cfa0e3ce44c?v=837177e6ad6145149178cc398942bd3d)  
+[Wiki](https://github.com/jacob-armiger/comic-list-web-scraper/wiki)
