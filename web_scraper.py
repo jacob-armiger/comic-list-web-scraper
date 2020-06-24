@@ -23,7 +23,7 @@ def create_list(text):
     # the end of each text element
     for t in text:
         file.write(t.text)
-        file.write(", ")
+        file.write(",")
     # Close File
     file.close()
 
@@ -35,7 +35,7 @@ def create_list(text):
     comic_list = []
     while True:
         line = file.readline()
-        comic_list.append(line)
+        comic_list.append(line.lstrip())
         if not line: break
     # Close File
     file.close()
