@@ -1,2 +1,7 @@
 reading_list.txt
+__pycache__
+dist
+build
 venv
+winenv
+web_scraper.spec
