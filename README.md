@@ -7,6 +7,11 @@ You can upload the csv file to Excel and make a checklist of comics you've read.
 - Learn and use good development practices
 - Document learning
 
+## Creating an .exe file
+1. Make sure you have installed all the modules inside the `requirements.txt` file. Namely `pyinstaller`, which is the module that creates an executable.
+2. Run `pyinstaller --onefile web_scraper.py`  
+   This will create the `dist`, `build`, and `__pycache__` folders. The executable is inside the `dist` folder. Now you have an executable that you can share with users!
+
 ## How-To
 1. Inside `webscraper.py`, change `REQUEST_URL` to the website you would like to scrape:
 ```
