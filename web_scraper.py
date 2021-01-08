@@ -91,7 +91,17 @@ def clean(comic_list):
 
 def main():
     # URL to be scraped
-    REQUEST_URL = 'https://comicbookreadingorders.com/dc/event-timeline/'
+    REQUEST_URL = ''
+
+    # Get input from the user
+    print("Welcome! Copy and paste a reading order from \nhttps://comicbookreadingorders.com/ or click enter\n")
+    REQUEST_URL = input("URL: ");
+
+    # Use URL from the user or a default URL
+    if REQUEST_URL:
+        pass
+    elif not REQUEST_URL:
+        REQUEST_URL = 'https://comicbookreadingorders.com/dc/event-timeline/'
 
     # Stores comic book titles listed on URL
     text = scrape(REQUEST_URL)
