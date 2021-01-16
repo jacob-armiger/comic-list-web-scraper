@@ -8,7 +8,7 @@ You can upload the csv file to Excel and make a checklist of comics you've read.
 - Document learning
 
 ## Creating an .exe file
-1. Make sure you have installed all the modules inside the `requirements.txt` file. Namely `pyinstaller`, which is the module that creates an executable.
+1. Run `pip install -r requirements.txt` to install all the modules inside the `requirements.txt` file. Namely `pyinstaller`, which is the module that creates an executable.
 2. Run `pyinstaller --onefile web_scraper.py`  
    This will create the `dist`, `build`, and `__pycache__` folders. The executable is inside the `dist` folder. Now you have an executable that you can share with users!
 
