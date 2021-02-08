@@ -1,7 +1,8 @@
 # Comic List Reading Order Web Scraper
 This project uses a web scraper to gather a comic book list from https://comicbookreadingorders.com/ and formats the data into a valid csv file.
 You can upload the csv file to Excel and make a checklist of comics you've read.
-
+# Download
+Go to releases in the sidebar and choose the file for your OS to download!
 ## Goals
 - Develop a no-hassle program to quickly put reading orders onto an excel file
 - Learn and use good development practices
