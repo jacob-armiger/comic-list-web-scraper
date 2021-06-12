@@ -2,6 +2,8 @@ reading_list.txt
 __pycache__
 dist
 build
+env
 venv
 winenv
 web_scraper.spec
+.DS_Store
