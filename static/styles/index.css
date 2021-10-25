@@ -1,3 +1,8 @@
+body {
+	font-family: 'Lato', sans-serif;
+	color: #3a3a3a
+  }
+
 .main {
 	margin: auto;
 	width: 50%;
@@ -5,7 +10,9 @@
 	text-align: center;
   }
 
+
 input[type=text] {
+	font-size: large;
     padding:5px; 
     border:2px solid #ccc; 
     -webkit-border-radius: 5px;
@@ -17,6 +24,7 @@ input[type=text]:focus {
 }
 
 input[type=submit] {
+	font-size:medium;
     padding:5px 15px; 
     background:#ccc; 
     border:0 none;
