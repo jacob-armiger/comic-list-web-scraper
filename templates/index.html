@@ -13,7 +13,10 @@
 <body>
     <div class="main">
         <h1>Reading Order Download</h1>
-        <p>Copy and paste any url in the box below.</p>
+        <hr>
+        <p>Copy and paste any reading order url in the box below<br>
+            to download a csv file of all the comics in that reading order.
+        </p>
         <form action="{{ url_for('getURL')}}" method="post">
             <label><strong>Comic URL</strong></label><br>
             <input type="text" name="url"><br>

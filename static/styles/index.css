@@ -10,6 +10,10 @@ body {
 	text-align: center;
   }
 
+  hr {
+	border: 1px solid #e42525;
+  }
+
 
 input[type=text] {
 	font-size: large;
