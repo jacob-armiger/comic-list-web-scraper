@@ -2,6 +2,7 @@ reading_list.txt
 __pycache__
 dist
 build
+fenv
 env
 venv
 winenv

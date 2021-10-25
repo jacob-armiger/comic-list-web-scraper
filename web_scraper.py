@@ -89,31 +89,31 @@ def clean(comic_list):
     # Close File
     file.close()
 
-def main():
-    # URL to be scraped
-    REQUEST_URL = ''
+# def main():
+#     # URL to be scraped
+#     REQUEST_URL = ''
 
-    # Get input from the user
-    print("Welcome! Copy and paste a reading order from \nhttps://comicbookreadingorders.com/ or click enter\n")
-    REQUEST_URL = input("URL: ");
+#     # Get input from the user
+#     print("Welcome! Copy and paste a reading order from \nhttps://comicbookreadingorders.com/ or click enter\n")
+#     REQUEST_URL = input("URL: ");
 
-    # Use URL from the user or a default URL
-    if REQUEST_URL:
-        pass
-    elif not REQUEST_URL:
-        REQUEST_URL = 'https://comicbookreadingorders.com/dc/event-timeline/'
+#     # Use URL from the user or a default URL
+#     if REQUEST_URL:
+#         pass
+#     elif not REQUEST_URL:
+#         REQUEST_URL = 'https://comicbookreadingorders.com/dc/event-timeline/'
 
-    # Stores comic book titles listed on URL
-    text = scrape(REQUEST_URL)
+#     # Stores comic book titles listed on URL
+#     text = scrape(REQUEST_URL)
 
-    # Writes text to a text file and creates a list from the entries in the text file
-    comic_list = create_list(text)
+#     # Writes text to a text file and creates a list from the entries in the text file
+#     comic_list = create_list(text)
 
-    # Overwrites text file with more relevant and better formatted entries
-    clean(comic_list)
+#     # Overwrites text file with more relevant and better formatted entries
+#     clean(comic_list)
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
 
 
 
