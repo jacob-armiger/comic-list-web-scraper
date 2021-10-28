@@ -17,9 +17,9 @@
         <p>Copy and paste any reading order url in the box below<br>
             to download a csv file of all the comics in that reading order.
         </p>
-        <form action="{{ url_for('getURL')}}" method="post">
+        <form action="{{ url_for('getInput')}}" method="post">
             <label><strong>Comic URL</strong></label><br>
-            <input type="text" name="url"><br>
+            <input type="text" name="input"><br>
             <input type="submit" name="Excel" value="Download Excel">
             <input type="submit" name="CSV" value="Download CSV">
         </form>
@@ -31,7 +31,7 @@
             {{ message }}
         </div>
         {% endfor %}
-        
+
         <a href="https://comicbookreadingorders.com">Back to reading orders</a>
     </div>
 </body>

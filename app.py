@@ -15,15 +15,16 @@ from flask import Flask, request, render_template, send_file, flash
 import web_scraper
 
 app = Flask(__name__)
+# A secret key must be set for flash messages
 app.secret_key = 'topsecret'
 
 
 comic_url = ""
 @app.route('/', methods=["GET", "POST"])
-def getURL():
+def getInput():
     if request.method == "POST":
         # get url name input from html form
-        comic_url = request.form.get("url")
+        comic_url = request.form.get("input")
 
         # Handle input that doesn't have http schema
         if "https://" not in comic_url:
@@ -31,9 +32,10 @@ def getURL():
             comic_url = -1
 
         if(comic_url != -1):
-            # Create text
+            # Create text from given URL
             text = web_scraper.scrape(comic_url)
-            # Handle URL that throws exception
+
+            # If text == -1 then an error was thrown
             if text != -1:
                 # Create "reading_list.txt" CSV file
                 CSV_FILE_NAME = web_scraper.create_text_file(text)
