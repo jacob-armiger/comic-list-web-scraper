@@ -11,10 +11,11 @@
 # https://roytuts.com/how-to-download-file-using-python-flask/
 # https://stackoverflow.com/questions/22259847/application-not-picking-up-css-file-flask-python
 
-from flask import Flask, request, render_template, send_file
+from flask import Flask, request, render_template, send_file, flash
 import web_scraper
 
 app = Flask(__name__)
+app.secret_key = 'topsecret'
 
 
 comic_url = ""
@@ -24,22 +25,30 @@ def getURL():
         # get url name input from html form
         comic_url = request.form.get("url")
 
-        # Create text
-        text = web_scraper.scrape(comic_url)
+        # Handle input that doesn't have http schema
+        if "https://" not in comic_url:
+            flash("Not a valid URL")
+            comic_url = -1
 
-        # Create "reading_list.txt" CSV file
-        CSV_FILE_NAME = web_scraper.create_text_file(text)
+        if(comic_url != -1):
+            # Create text
+            text = web_scraper.scrape(comic_url)
+            # Handle URL that throws exception
+            if text != -1:
+                # Create "reading_list.txt" CSV file
+                CSV_FILE_NAME = web_scraper.create_text_file(text)
 
-        # Create EXCEL file
-        EXCEL_FILE_NAME = web_scraper.create_excel(CSV_FILE_NAME)
+                # Create EXCEL file
+                EXCEL_FILE_NAME = web_scraper.create_excel(CSV_FILE_NAME)
 
-        # Flask will get file with this name and give it to the user
-        if(request.form.get("CSV")):
-            path = CSV_FILE_NAME
-        elif(request.form.get("Excel")):
-            path = EXCEL_FILE_NAME
-        
-        return send_file(path, as_attachment=True)
+                # Set path name depending on which submit button pressed
+                if(request.form.get("CSV")):
+                    path = CSV_FILE_NAME
+                elif(request.form.get("Excel")):
+                    path = EXCEL_FILE_NAME
+                
+                # Flask will get file with path name and give it to the user
+                return send_file(path, as_attachment=True)
     return render_template('index.html')
 
 

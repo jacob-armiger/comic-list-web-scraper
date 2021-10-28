@@ -1,10 +1,24 @@
 #! python3
 import requests, bs4, lxml
+from flask import flash
 from openpyxl import Workbook
 
 def scrape(url):
     # Gets url of reading order page and saves to page variable
-    page = requests.get(url)
+    try:
+        page = requests.get(url,timeout=30)
+    except requests.ConnectionError as e:
+        flash("We couldn't connect to that URL. Try again!\n")
+        print(str(e))            
+        return -1
+    except requests.Timeout as e:
+        flash("OOPS!! Timeout Error")
+        print(str(e))
+        return -1
+    except requests.RequestException as e:
+        flash("OOPS!! General Error")
+        print(str(e))
+        return -1
 
     # Parse HTML to find all <p> elements
     soup = bs4.BeautifulSoup(page.text, 'lxml')

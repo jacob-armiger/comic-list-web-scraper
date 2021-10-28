@@ -20,10 +20,18 @@
         <form action="{{ url_for('getURL')}}" method="post">
             <label><strong>Comic URL</strong></label><br>
             <input type="text" name="url"><br>
-            <input type="submit" name="CSV" value="Download CSV">
             <input type="submit" name="Excel" value="Download Excel">
-        </form> 
+            <input type="submit" name="CSV" value="Download CSV">
+        </form>
         <br>
+
+        {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{ message }}
+        </div>
+        {% endfor %}
+        
         <a href="https://comicbookreadingorders.com">Back to reading orders</a>
     </div>
 </body>
