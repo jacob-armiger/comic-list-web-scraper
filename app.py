@@ -28,10 +28,17 @@ def getURL():
         text = web_scraper.scrape(comic_url)
 
         # Create "reading_list.txt" CSV file
-        web_scraper.create_text_file(text)
+        CSV_FILE_NAME = web_scraper.create_text_file(text)
+
+        # Create EXCEL file
+        EXCEL_FILE_NAME = web_scraper.create_excel(CSV_FILE_NAME)
 
         # Flask will get file with this name and give it to the user
-        path = "reading_list.txt"
+        if(request.form.get("CSV")):
+            path = CSV_FILE_NAME
+        elif(request.form.get("Excel")):
+            path = EXCEL_FILE_NAME
+        
         return send_file(path, as_attachment=True)
     return render_template('index.html')
 

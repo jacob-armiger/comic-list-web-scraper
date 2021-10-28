@@ -47,7 +47,7 @@ def create_text_file(text):
     # Format file to CSV
     text_to_csv(comic_list)
 
-    return comic_list
+    return FILE_NAME
 
 def text_to_csv(comic_list):
     # This function cleans text from comic_list and turns it into CSV format
@@ -114,10 +114,13 @@ def create_excel(csv_file_name):
     for index, comic in enumerate(comics):
         ws.cell(row=index+1, column=1, value=comic)
 
-
+    # Set proper width for column
     ws.column_dimensions['A'].width = len(max_length)
 
-    wb.save("reading_list.xlsx")
+    EXCEL_FILE_NAME = "reading_list.xlsx"
+    wb.save(EXCEL_FILE_NAME)
+
+    return EXCEL_FILE_NAME
 
 # def main():
 #     # URL to be scraped

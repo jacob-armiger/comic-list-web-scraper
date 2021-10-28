@@ -20,7 +20,8 @@
         <form action="{{ url_for('getURL')}}" method="post">
             <label><strong>Comic URL</strong></label><br>
             <input type="text" name="url"><br>
-            <input type="submit" value="Download!">
+            <input type="submit" name="CSV" value="Download CSV">
+            <input type="submit" name="Excel" value="Download Excel">
         </form> 
         <br>
         <a href="https://comicbookreadingorders.com">Back to reading orders</a>
