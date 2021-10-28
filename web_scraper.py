@@ -1,9 +1,24 @@
 #! python3
 import requests, bs4, lxml
+from flask import flash
+from openpyxl import Workbook
 
 def scrape(url):
     # Gets url of reading order page and saves to page variable
-    page = requests.get(url)
+    try:
+        page = requests.get(url,timeout=30)
+    except requests.ConnectionError as e:
+        flash("We couldn't connect to that URL. Try again!\n")
+        print(str(e))            
+        return -1
+    except requests.Timeout as e:
+        flash("OOPS!! Timeout Error")
+        print(str(e))
+        return -1
+    except requests.RequestException as e:
+        flash("OOPS!! General Error")
+        print(str(e))
+        return -1
 
     # Parse HTML to find all <p> elements
     soup = bs4.BeautifulSoup(page.text, 'lxml')
@@ -12,12 +27,14 @@ def scrape(url):
 
     return text
 
-def create_list(text):
+def create_text_file(text):
     # This function writes all the data scraped from URL onto a text file. Then,
     # it stores each line in the text file into a list.
 
+    FILE_NAME = "reading_list.txt"
+
     # Creates/opens text file to write comic book list to
-    file = open("reading_list.txt", 'w')
+    file = open(FILE_NAME, 'w')
 
     # Loops through every <p> element and writes text to file. Also appends comma to
     # the end of each text element
@@ -29,7 +46,7 @@ def create_list(text):
 
 
     # Opens text file to read from
-    file = open("reading_list.txt", 'r')
+    file = open(FILE_NAME, 'r')
 
     # Stores each line of file into comic_list
     comic_list = []
@@ -37,14 +54,17 @@ def create_list(text):
         line = file.readline()
         comic_list.append(line.lstrip())
         if not line: break
+
     # Close File
     file.close()
 
-    return comic_list
+    # Format file to CSV
+    text_to_csv(comic_list)
 
-def clean(comic_list):
-    # This function cleans up comic_list data and then overwrites reading_list.txt
-    # with cleaned data.
+    return FILE_NAME
+
+def text_to_csv(comic_list):
+    # This function cleans text from comic_list and turns it into CSV format
 
     # Replaces new line character with a comma. This is needed to correctly
     # format all data entries to csv
@@ -89,31 +109,57 @@ def clean(comic_list):
     # Close File
     file.close()
 
-def main():
-    # URL to be scraped
-    REQUEST_URL = ''
+def create_excel(csv_file_name):
+    # Create excel worksheet
+    wb = Workbook()
+    ws = wb.create_sheet("Comics",0)
 
-    # Get input from the user
-    print("Welcome! Copy and paste a reading order from \nhttps://comicbookreadingorders.com/ or click enter\n")
-    REQUEST_URL = input("URL: ");
+    # Read CSV file
+    file = open(csv_file_name, 'r')
+    text = file.read()
 
-    # Use URL from the user or a default URL
-    if REQUEST_URL:
-        pass
-    elif not REQUEST_URL:
-        REQUEST_URL = 'https://comicbookreadingorders.com/dc/event-timeline/'
+    # Create array of comics
+    comics = text.split(',')
 
-    # Stores comic book titles listed on URL
-    text = scrape(REQUEST_URL)
+    # Get max length of comic names
+    max_length = max(comics, key=len)
 
-    # Writes text to a text file and creates a list from the entries in the text file
-    comic_list = create_list(text)
+    # Assign values to cells
+    for index, comic in enumerate(comics):
+        ws.cell(row=index+1, column=1, value=comic)
 
-    # Overwrites text file with more relevant and better formatted entries
-    clean(comic_list)
+    # Set proper width for column
+    ws.column_dimensions['A'].width = len(max_length)
 
-if __name__ == "__main__":
-    main()
+    EXCEL_FILE_NAME = "reading_list.xlsx"
+    wb.save(EXCEL_FILE_NAME)
+
+    return EXCEL_FILE_NAME
+
+# def main():
+#     # URL to be scraped
+#     REQUEST_URL = ''
+
+#     # Get input from the user
+#     print("Welcome! Copy and paste a reading order from \nhttps://comicbookreadingorders.com/ or click enter\n")
+#     REQUEST_URL = input("URL: ");
+
+#     # Use URL from the user or a default URL
+#     if REQUEST_URL:
+#         pass
+#     elif not REQUEST_URL:
+#         REQUEST_URL = 'https://comicbookreadingorders.com/dc/event-timeline/'
+
+#     # Stores comic book titles listed on URL
+#     text = scrape(REQUEST_URL)
+
+#     # Writes text to a text file and creates a list from the entries in the text file
+#     create_text_file(text)
+
+#     create_excel("reading_list.txt")
+
+# if __name__ == "__main__":
+#     main()
 
 
 

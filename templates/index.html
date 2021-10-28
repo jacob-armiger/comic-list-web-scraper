@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/index.css') }}">
+    <title>COMIC</title>
+</head>
+<body>
+    <div class="main">
+        <h1>Reading Order Download</h1>
+        <hr>
+        <p>Copy and paste any reading order url in the box below<br>
+            to download a csv file of all the comics in that reading order.
+        </p>
+        <form action="{{ url_for('getInput')}}" method="post">
+            <label><strong>Comic URL</strong></label><br>
+            <input type="text" name="input"><br>
+            <input type="submit" name="Excel" value="Download Excel">
+            <input type="submit" name="CSV" value="Download CSV">
+        </form>
+        <br>
+
+        {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{ message }}
+        </div>
+        {% endfor %}
+
+        <a href="https://comicbookreadingorders.com">Back to reading orders</a>
+    </div>
+</body>
+</html>
