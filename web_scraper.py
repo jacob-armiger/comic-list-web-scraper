@@ -1,5 +1,6 @@
 #! python3
 import requests, bs4, lxml
+from openpyxl import Workbook
 
 def scrape(url):
     # Gets url of reading order page and saves to page variable
@@ -94,6 +95,30 @@ def text_to_csv(comic_list):
     # Close File
     file.close()
 
+def create_excel(csv_file_name):
+    # Create excel worksheet
+    wb = Workbook()
+    ws = wb.create_sheet("Comics",0)
+
+    # Read CSV file
+    file = open(csv_file_name, 'r')
+    text = file.read()
+
+    # Create array of comics
+    comics = text.split(',')
+
+    # Get max length of comic names
+    max_length = max(comics, key=len)
+
+    # Assign values to cells
+    for index, comic in enumerate(comics):
+        ws.cell(row=index+1, column=1, value=comic)
+
+
+    ws.column_dimensions['A'].width = len(max_length)
+
+    wb.save("reading_list.xlsx")
+
 # def main():
 #     # URL to be scraped
 #     REQUEST_URL = ''
@@ -113,6 +138,8 @@ def text_to_csv(comic_list):
 
 #     # Writes text to a text file and creates a list from the entries in the text file
 #     create_text_file(text)
+
+#     create_excel("reading_list.txt")
 
 # if __name__ == "__main__":
 #     main()
