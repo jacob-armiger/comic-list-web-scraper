@@ -27,11 +27,10 @@ def getURL():
         # Create text
         text = web_scraper.scrape(comic_url)
 
-        # Create file
-        comic_list = web_scraper.create_list(text)
+        # Create "reading_list.txt" CSV file
+        web_scraper.create_text_file(text)
 
-        # Clean list
-        web_scraper.clean(comic_list)
+        # Flask will get file with this name and give it to the user
         path = "reading_list.txt"
         return send_file(path, as_attachment=True)
     return render_template('index.html')

@@ -12,12 +12,14 @@ def scrape(url):
 
     return text
 
-def create_list(text):
+def create_text_file(text):
     # This function writes all the data scraped from URL onto a text file. Then,
     # it stores each line in the text file into a list.
 
+    FILE_NAME = "reading_list.txt"
+
     # Creates/opens text file to write comic book list to
-    file = open("reading_list.txt", 'w')
+    file = open(FILE_NAME, 'w')
 
     # Loops through every <p> element and writes text to file. Also appends comma to
     # the end of each text element
@@ -29,7 +31,7 @@ def create_list(text):
 
 
     # Opens text file to read from
-    file = open("reading_list.txt", 'r')
+    file = open(FILE_NAME, 'r')
 
     # Stores each line of file into comic_list
     comic_list = []
@@ -37,14 +39,17 @@ def create_list(text):
         line = file.readline()
         comic_list.append(line.lstrip())
         if not line: break
+
     # Close File
     file.close()
 
+    # Format file to CSV
+    text_to_csv(comic_list)
+
     return comic_list
 
-def clean(comic_list):
-    # This function cleans up comic_list data and then overwrites reading_list.txt
-    # with cleaned data.
+def text_to_csv(comic_list):
+    # This function cleans text from comic_list and turns it into CSV format
 
     # Replaces new line character with a comma. This is needed to correctly
     # format all data entries to csv
@@ -107,10 +112,7 @@ def clean(comic_list):
 #     text = scrape(REQUEST_URL)
 
 #     # Writes text to a text file and creates a list from the entries in the text file
-#     comic_list = create_list(text)
-
-#     # Overwrites text file with more relevant and better formatted entries
-#     clean(comic_list)
+#     create_text_file(text)
 
 # if __name__ == "__main__":
 #     main()
