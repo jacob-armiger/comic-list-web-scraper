@@ -1,1 +1,1 @@
-web: gunicorn reading-orders-downloader.wsgi
+web: gunicorn app:app
