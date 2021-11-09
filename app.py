@@ -53,11 +53,5 @@ def getInput():
                 return send_file(path, as_attachment=True)
     return render_template('index.html')
 
-
-# # @app.route('/reading_list.txt')
-# # def downloadFile():
-#         path = "reading_list.txt"
-#         return send_file(path, as_attachment=True)
-
 if __name__ == '__main__':
     app.run()
