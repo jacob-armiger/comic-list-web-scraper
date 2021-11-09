@@ -30,8 +30,9 @@ input[type=text]:focus {
 input[type=submit] {
 	font-size:medium;
     padding:5px 15px; 
-    background:#ccc; 
-    border:0 none;
+    color: white;
+    background:#e42525; 
+    border:1px solid black;
     cursor:pointer;
     -webkit-border-radius: 5px;
     border-radius: 5px; 
