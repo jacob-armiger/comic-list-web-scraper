@@ -7,7 +7,10 @@ body {
 
 .main {
 	margin: auto;
+  margin-top: 120px;
 	width: 50%;
+  max-width: 900px;
+  min-width: 250px;
 	padding: 10px;
 	text-align: center;
   }
