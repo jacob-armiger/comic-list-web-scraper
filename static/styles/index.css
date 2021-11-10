@@ -29,7 +29,8 @@ input[type=text]:focus {
 
 input[type=submit] {
 	font-size:medium;
-    padding:5px 15px; 
+    padding:5px 15px;
+    margin-top: 4px;
     color: white;
     background:#e42525; 
     border:1px solid black;
