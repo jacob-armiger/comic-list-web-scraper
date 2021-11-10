@@ -1,6 +1,8 @@
 body {
 	font-family: 'Lato', sans-serif;
-	color: #3a3a3a
+	color: #3a3a3a;
+  margin:0;
+  padding:0;
   }
 
 .main {
@@ -29,12 +31,103 @@ input[type=text]:focus {
 
 input[type=submit] {
 	font-size:medium;
-    padding:5px 15px;
-    margin-top: 4px;
-    color: white;
-    background:#e42525; 
-    border:1px solid black;
-    cursor:pointer;
-    -webkit-border-radius: 5px;
-    border-radius: 5px; 
+  width: 150px;
+  padding:5px 15px;
+  margin-top: 4px;
+  color: white;
+  background:#e42525; 
+  border:1px solid black;
+  cursor:pointer;
+  -webkit-border-radius: 5px;
+  border-radius: 5px; 
 }
+
+/*FOOTER CSS*/
+footer {
+  position: absolute;
+  padding-bottom: 40px;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+}
+
+ul {
+  padding-left: 0;
+  list-style: none;
+  text-align: center;
+}
+
+li {
+  width: 100%;
+}
+
+.footer-link {
+  text-decoration: none;
+  color: #c01c1c;
+}
+
+.footer-link:hover {
+  color: rgb(255, 196, 0);
+}
+
+/* .footer-basic {
+  padding:40px 0;
+  background-color:#6e6666;
+  color:#4b4c4d;
+}
+
+.footer-basic ul {
+  padding:0;
+  list-style:none;
+  text-align:center;
+  font-size:18px;
+  line-height:1.6;
+  margin-bottom:0;
+}
+
+.footer-basic li {
+  padding:0 10px;
+}
+
+.footer-basic ul a {
+  color:inherit;
+  text-decoration:none;
+  opacity:0.8;
+}
+
+.footer-basic ul a:hover {
+  opacity:1;
+}
+
+.footer-basic .social {
+  text-align:center;
+  padding-bottom:25px;
+}
+
+.footer-basic .social > a {
+  font-size:24px;
+  width:40px;
+  height:40px;
+  line-height:40px;
+  display:inline-block;
+  text-align:center;
+  border-radius:50%;
+  border:1px solid #ccc;
+  margin:0 8px;
+  color:inherit;
+  opacity:0.75;
+}
+
+.footer-basic .social > a:hover {
+  opacity:0.9;
+}
+
+.footer-basic .copyright {
+  margin-top:15px;
+  text-align:center;
+  font-size:13px;
+  color:#aaa;
+  margin-bottom:0;
+}
+*/
+/* Credit to https://epicbootstrap.com/snippets/footer-basic */
