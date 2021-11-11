@@ -17,7 +17,7 @@ import os
 
 app = Flask(__name__)
 # A secret key must be set for flash messages
-app.secret_key = os.getenv('SUPER_SECRET')
+app.secret_key = os.getenv('SUPER_SECRET', 'for_dev')
 
 comic_url = ""
 @app.route('/', methods=["GET", "POST"])
