@@ -13,11 +13,11 @@
 
 from flask import Flask, request, render_template, send_file, flash
 import web_scraper
+import os
 
 app = Flask(__name__)
 # A secret key must be set for flash messages
-app.secret_key = 'topsecret'
-
+app.secret_key = os.getenv('SUPER_SECRET')
 
 comic_url = ""
 @app.route('/', methods=["GET", "POST"])
