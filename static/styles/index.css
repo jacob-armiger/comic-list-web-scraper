@@ -1,42 +1,53 @@
 body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
 	font-family: 'Lato', sans-serif;
 	color: #3a3a3a;
 
-  background-image: url("/static/new.background.black.svg");
+  background: url("/static/new.background.black.svg");
   background-size: 100%;
   background-color: #C1C1C1;
 
   margin:0;
   padding:0;
-  }
+}
 
 .main {
 	text-align: center;
   background-color: white;
+  border: 2px solid #C1C1C1;
 
-	width: 50%;
   max-width: 900px;
   min-width: 250px;
 
 	margin: auto;
-  margin-top: 120px;
-	padding: 10px;
-  }
+	padding: 0px;
+}
+
+.main img {
+  max-width: 100%;
+}
+
+.content {
+  padding: 0px 30px 0px 30px;
+}
 
 hr {
-border: 1px solid #e42525;
+  border: 1px solid #e42525;
 }
 
 input[type=text] {
 	font-size: large;
-    padding:5px; 
-    border:2px solid #ccc; 
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
+  padding:5px; 
+  border:2px solid #ccc; 
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
 }
 
 input[type=text]:focus {
-    border-color:#333;
+  border-color:#333;
 }
 
 input[type=submit] {
@@ -54,10 +65,14 @@ input[type=submit] {
 
 /*FOOTER CSS*/
 footer {
+  background-color: white;
+
   position: absolute;
   padding-bottom: 40px;
   bottom: 0;
-  width: 100%;
+
+  width: 900px;
+
   height: 50px;
 }
 

@@ -21,29 +21,33 @@
     <link rel="icon" type="image/x-icon" href="/static/favicon.png">
     <title>Downloader</title>
 </head>
+
 <body>
     <div class="main">
-        <h1>Reading Orders Downloader</h1>
-        <hr>
-        <p>Copy and paste any reading order URL in the box below
-            to download an Excel or CSV file of all the comics in that reading order.
-        </p>
-        <form action="{{ url_for('getInput')}}" method="post">
-            <label><strong>Comic URL</strong></label><br>
-            <input type="text" name="input"><br>
-            <input type="submit" name="Excel" value="Download Excel">
-            <input type="submit" name="CSV" value="Download CSV">
-        </form>
-        <br>
+        <img src="/static/main.header.svg">
+        <div class="content">
+            <h1>Reading Orders Downloader</h1>
+            <hr>
+            <p>Copy and paste any reading order URL in the box below
+                to download an Excel or CSV file of all the comics in that reading order.
+            </p>
+            <form action="{{ url_for('getInput')}}" method="post">
+                <label><strong>Comic URL</strong></label><br>
+                <input type="text" name="input"><br>
+                <input type="submit" name="Excel" value="Download Excel">
+                <input type="submit" name="CSV" value="Download CSV">
+            </form>
+            <br>
 
-        {% for message in get_flashed_messages() %}
-        <div class="alert alert-warning">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            {{ message }}
+            {% for message in get_flashed_messages() %}
+            <div class="alert alert-warning">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                {{ message }}
+            </div>
+            {% endfor %}
+
+            <a href="https://comicbookreadingorders.com">Back to reading orders</a>
         </div>
-        {% endfor %}
-
-        <a href="https://comicbookreadingorders.com">Back to reading orders</a>
     </div>
     <footer>
         <ul>
