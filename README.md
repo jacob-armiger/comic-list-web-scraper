@@ -1,5 +1,5 @@
 # Comic List Reading Order Web Scraper
-**Link to app:** https://reading-orders-downloader.herokuapp.com  
+**Link to app:** https://www.comicbookreadingordersdownload.com 
 
 This a small web app built with Flask. A python backend will scrape a given URL from https://comicbookreadingorders.com/ to create a CSV or Excel file that contains all the comics in that reading order.
 
