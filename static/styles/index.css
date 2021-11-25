@@ -51,7 +51,7 @@ body {
   width: 100%;
   max-width: 960px;
   min-width: 250px;
-  box-shadow: inset 0 7px 9px -7px rgba(0,0,0,0.4);
+  box-shadow: inset 0 9px 9px -7px rgba(0,0,0,0.4);
 }
 
 .content {
@@ -64,10 +64,14 @@ hr {
 
 input[type=text] {
 	font-size: large;
-  padding:5px; 
-  border:2px solid #ccc; 
+  border: 2px solid #ccc;
   -webkit-border-radius: 5px;
   border-radius: 5px;
+
+  width:100%;
+  max-width: 400px;
+
+  padding: 5px; 
 }
 
 input[type=text]:focus {
@@ -83,6 +87,7 @@ input[type=submit] {
   width: 150px;
   padding:5px 15px;
   margin-top: 4px;
+  margin-bottom: 15px;
 
   cursor:pointer;
   -webkit-border-radius: 5px;
