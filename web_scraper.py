@@ -23,9 +23,9 @@ def scrape(url):
     # Parse HTML to find all <p> elements
     soup = bs4.BeautifulSoup(page.text, 'lxml')
     soup.prettify()
-    text = soup.find_all('p')
+    soup_list_object = soup.find_all('p')
 
-    return text
+    return soup_list_object
 
 def create_text_file(text):
     # This function writes all the data scraped from URL onto a text file. Then,
@@ -36,7 +36,7 @@ def create_text_file(text):
     # Creates/opens text file to write comic book list to
     file = open(FILE_NAME, 'w')
 
-    # Loops through every <p> element and writes text to file. Also appends comma to
+    # Loops through every <p> element and writes text to file. Also appends semi-colon to
     # the end of each text element
     for t in text:
         file.write(t.text)
@@ -66,7 +66,7 @@ def create_text_file(text):
 def text_to_csv(comic_list):
     # This function cleans text from comic_list and turns it into CSV format
 
-    # Replaces new line character with a comma. This is needed to correctly
+    # Replaces new line character with a semi-colon. This is needed to correctly
     # format all data entries to csv
     for index in range(len(comic_list)):
         comic_list[index] = comic_list[index].replace('\n',';')
@@ -74,7 +74,7 @@ def text_to_csv(comic_list):
     # Joins comic_list into one string
     comic_list_string = ''.join(comic_list)
 
-    # Splits the string at every comma. Now almost all comic titles will be 
+    # Splits the string at every semi-colon. Now almost all comic titles will be 
     # separated into individual elements into list.
     comic_list = comic_list_string.split(';')
 
@@ -96,7 +96,7 @@ def text_to_csv(comic_list):
             if(((keep == 'n') and (elem.find("here.") == -1)) or (elem.find("First Appearance:") != -1) or (elem.find("everywhere. In his") != -1)):
                 comic_list.remove(elem)
 
-    # Re-join comic_list elements separated by a comma. This allows us to create
+    # Re-join comic_list elements separated by a semi-colon. This allows us to create
     # csv file.
     csv_formatted_string = ';'.join(comic_list)
 
@@ -108,6 +108,47 @@ def text_to_csv(comic_list):
 
     # Close File
     file.close()
+
+def create_csv_quicker(soup_list_obj): 
+  # This function writes all the data scraped from URL onto a text file. Then,
+    # it stores each line in the text file into a list.
+
+    FILE_NAME = "reading_list.txt"
+    comic_list = []
+
+    # Loops through every <p> element and writes text to file. Also appends semi-colon to
+    # the end of each text element\
+    for item in soup_list_obj:
+        comic_list.append(item.text.lstrip() + ";")
+
+    for comic in comic_list:
+        print(comic + '\n')
+
+        # Sets keep variable for entry
+        for char in comic:
+            if((char == '#') or (char == '(')):
+                keep = True
+                break
+            else:
+                keep = False
+        
+        # Removes entry if:
+        # keep is set to 'n' AND "here." is not found,
+        # OR "First Appearance:" is found...
+        if ( ((keep == False) and (comic.find("here.") == None)) or (comic.find("First Appearance:") != None) or (comic.find("everywhere. In his") != None) ):
+            comic_list.remove(comic)
+
+    # Re-join comic_list elements separated by a semi-colon. This allows us to create
+    # csv file.
+    csv_formatted_string = ''.join(comic_list)
+    print(csv_formatted_string)
+
+    # Opens file to write newly csv formatted data
+    file = open("reading_list.txt", 'w')
+    file.write(csv_formatted_string)
+
+    return FILE_NAME
+
 
 def create_excel(csv_file_name):
     # Create excel worksheet
@@ -136,7 +177,7 @@ def create_excel(csv_file_name):
 
     return EXCEL_FILE_NAME
 
-"""
+
 def main():
     # URL to be scraped
     REQUEST_URL = ''
@@ -151,17 +192,19 @@ def main():
     elif not REQUEST_URL:
         REQUEST_URL = 'https://comicbookreadingorders.com/dc/event-timeline/'
 
+
     # Stores comic book titles listed on URL
     text = scrape(REQUEST_URL)
 
+    create_csv_quicker(text)
     # Writes text to a text file and creates a list from the entries in the text file
-    create_text_file(text)
+    #create_text_file(text)
 
     create_excel("reading_list.txt")
 
 if __name__ == "__main__":
     main()
-"""
+
 
 
 
