@@ -29,16 +29,14 @@ def getInput():
         # Handle input that doesn't have http schema
         if "https://" not in comic_url:
             flash("Not a valid URL")
-            comic_url = -1
-
-        if(comic_url != -1):
+        else:
             # Create text from given URL
             text = web_scraper.scrape(comic_url)
 
             # If text == -1 then an error was thrown
             if text != -1:
                 # Create "reading_list.txt" CSV file
-                CSV_FILE_NAME = web_scraper.create_text_file(text)
+                CSV_FILE_NAME = web_scraper.create_csv(text)
 
                 # Create EXCEL file
                 EXCEL_FILE_NAME = web_scraper.create_excel(CSV_FILE_NAME)
