@@ -1,4 +1,5 @@
-reading_list.*
+*.txt
+*.xlsx
 cbro.site.graphics
 __pycache__
 dist

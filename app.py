@@ -16,6 +16,7 @@ import web_scraper
 import os
 
 app = Flask(__name__)
+
 # A secret key must be set for flash messages
 app.secret_key = os.getenv('SUPER_SECRET', 'for_dev')
 
@@ -29,16 +30,14 @@ def getInput():
         # Handle input that doesn't have http schema
         if "https://" not in comic_url:
             flash("Not a valid URL")
-            comic_url = -1
+        else:
+            # Create scraped_data from given URL
+            scraped_data = web_scraper.scrape(comic_url)
 
-        if(comic_url != -1):
-            # Create text from given URL
-            text = web_scraper.scrape(comic_url)
-
-            # If text == -1 then an error was thrown
-            if text != -1:
+            # If scraped_data == -1 then scraping failed
+            if scraped_data != -1:
                 # Create "reading_list.txt" CSV file
-                CSV_FILE_NAME = web_scraper.create_text_file(text)
+                CSV_FILE_NAME = web_scraper.create_csv(scraped_data)
 
                 # Create EXCEL file
                 EXCEL_FILE_NAME = web_scraper.create_excel(CSV_FILE_NAME)
@@ -49,7 +48,7 @@ def getInput():
                 elif(request.form.get("Excel")):
                     path = EXCEL_FILE_NAME
                 
-                # Flask will get file with path name and give it to the user
+                # Flask will get file with path name and serve it to the user
                 return send_file(path, as_attachment=True)
     return render_template('index.html')
 
