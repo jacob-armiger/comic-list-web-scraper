@@ -3,6 +3,8 @@ import requests, bs4, lxml
 from flask import flash
 from openpyxl import Workbook
 
+import time
+
 def scrape(url):
     # Gets url of reading order page and saves to page variable
     try:
@@ -28,39 +30,44 @@ def scrape(url):
     return soup_list_object
 
 def create_csv(soup_list_obj): 
-  # This function writes all the data scraped from URL onto a text file. Then,
+    # This function writes all the data scraped from URL onto a text file. Then,
     # it stores each line in the text file into a list.
 
     FILE_NAME = "reading_list.txt"
     comic_list = []
 
-    # Loops through every <p> element and writes text to file. Also appends semi-colon to
-    # the end of each text element\
-    for item in soup_list_obj:
-        comic_list.append(item.text.lstrip() + ";")
+    # Loops through every <p> element
+    for p_element in soup_list_obj:
+        # This splits <p> elements that have multiple comic entries
+        chunk = p_element.text.split('\n')
 
-    for comic in comic_list:
-        # Sets keep variable for entry
-        for char in comic:
-            if((char == '#') or (char == '(')):
-                keep = True
-                break
-            else:
-                keep = False
-        
-        # Removes entry if:
-        # keep is set to 'n' AND "here." is not found,
-        # OR "First Appearance:" is found...
-        if ( ((keep == False) and (comic.find("here.") == -1)) or (comic.find("First Appearance:") != -1) or (comic.find("everywhere. In his") != -1) ):
-            comic_list.remove(comic)
+        for comic in chunk:
+            # Add comic book event listings to list
+            if(comic.find(" here.") != -1):
+                comic_list.append(comic.lstrip() + ";")
+                continue
+            # Do not add
+            if(comic.find("First Appearance:") != -1):
+                continue
+            # Add alternate starts
+            if(comic.find("Alternate Starting Point:") != -1):
+                comic_list.append(comic.lstrip() + ";")
+                continue
+            # Add comics that are numbered or dated
+            for char in comic:
+                if((char == '#') or (char == '(')):
+                    comic_list.append(comic.lstrip() + ";")
+                    break
 
-    # Re-join comic_list elements separated by a semi-colon. This allows us to create
-    # csv file.
+    
+    # Re-join comic entries into a CSV file
     csv_formatted_string = ''.join(comic_list)
 
-    # Opens file to write newly csv formatted data
+    # Opens file to write CSV formatted data
     file = open("reading_list.txt", 'w')
     file.write(csv_formatted_string)
+
+    file.close()
 
     return FILE_NAME
 
@@ -92,7 +99,7 @@ def create_excel(csv_file_name):
 
     return EXCEL_FILE_NAME
 
-
+"""
 def main():
     # URL to be scraped
     REQUEST_URL = ''
@@ -118,7 +125,7 @@ def main():
 
 if __name__ == "__main__":
     main()
-
+"""
 
 
 
