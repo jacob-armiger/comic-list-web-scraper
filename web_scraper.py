@@ -3,10 +3,12 @@ import requests, bs4, lxml
 from flask import flash
 from openpyxl import Workbook
 
-import time
-
 def scrape(url):
-    # Gets url of reading order page and saves to page variable
+    """
+    Takes a URL and scrapes it for <p> elements
+    Returns bs4 object
+    """
+
     try:
         page = requests.get(url,timeout=30)
     except requests.ConnectionError as e:
@@ -30,15 +32,18 @@ def scrape(url):
     return soup_list_object
 
 def create_csv(soup_list_obj): 
-    # This function writes all the data scraped from URL onto a text file. Then,
-    # it stores each line in the text file into a list.
+    """
+    Takes list of <p> elements and separates them into comic titles.
+    Then joins titles into a CSV file.
+    Returns CSV file name
+    """
 
     FILE_NAME = "reading_list.txt"
     comic_list = []
 
     # Loops through every <p> element
     for p_element in soup_list_obj:
-        # This splits <p> elements that have multiple comic entries
+        # This splits <p> elements that have multiple comic titles
         chunk = p_element.text.split('\n')
 
         for comic in chunk:
@@ -60,7 +65,7 @@ def create_csv(soup_list_obj):
                     break
 
     
-    # Re-join comic entries into a CSV file
+    # Re-join comic titles into a CSV file
     csv_formatted_string = ''.join(comic_list)
 
     # Opens file to write CSV formatted data
@@ -73,7 +78,10 @@ def create_csv(soup_list_obj):
 
 
 def create_excel(csv_file_name):
-    # Create excel worksheet
+    """
+    Create excel worksheet from a CSV file.
+    Returns excel file name
+    """
     wb = Workbook()
     ws = wb.create_sheet("Comics",0)
 
@@ -81,10 +89,10 @@ def create_excel(csv_file_name):
     file = open(csv_file_name, 'r')
     text = file.read()
 
-    # Create array of comics
+    # Create array of comics titles with semi-colon delimiter
     comics = text.split(';')
 
-    # Get max length of comic names
+    # Get max length of comic titles
     max_length = max(comics, key=len)
 
     # Assign values to cells
@@ -98,6 +106,7 @@ def create_excel(csv_file_name):
     wb.save(EXCEL_FILE_NAME)
 
     return EXCEL_FILE_NAME
+
 
 """
 def main():
