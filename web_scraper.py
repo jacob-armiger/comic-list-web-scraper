@@ -1,16 +1,17 @@
 #! python3
-import requests, bs4, lxml
+import requests, bs4
 from flask import flash
 from openpyxl import Workbook
+import urllib3
 
 def scrape(url):
     """
     Takes a URL and scrapes it for <p> elements
     Returns bs4 object
     """
-
+    http = urllib3.PoolManager()
     try:
-        page = requests.get(url,timeout=30)
+        page = http.request("GET",url)
     except requests.ConnectionError as e:
         flash("We couldn't connect to that URL. Try again!\n")
         print(str(e))            
@@ -25,7 +26,7 @@ def scrape(url):
         return -1
 
     # Parse HTML to find all <p> elements
-    soup = bs4.BeautifulSoup(page.text, 'lxml')
+    soup = bs4.BeautifulSoup(page.data, 'lxml')
     soup.prettify()
     soup_list_object = soup.find_all('p')
 
