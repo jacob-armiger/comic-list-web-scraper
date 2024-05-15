@@ -9,9 +9,14 @@ def scrape(url):
     Takes a URL and scrapes it for <p> elements
     Returns bs4 object
     """
+    # Change User-Agent so that scraper isn't blocked
+    headers = {
+    'User-Agent': 'Mozilla/6.0',
+    }
+
     http = urllib3.PoolManager()
     try:
-        page = http.request("GET",url)
+        page = http.request("GET", url, headers=headers)
     except requests.ConnectionError as e:
         flash("We couldn't connect to that URL. Try again!\n")
         print(str(e))            
