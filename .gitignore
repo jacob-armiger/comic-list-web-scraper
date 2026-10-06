@@ -9,3 +9,4 @@ env
 venv
 winenv
 .DS_Store
+.wrangler

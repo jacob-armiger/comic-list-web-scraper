@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TD0NY17KLR"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-TD0NY17KLR');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="styles/index.css">
+    <link rel="icon" href="favicon.png">
+    <title>Downloader</title>
+</head>
+
+<body>
+    <img class="header" src="main.header.svg"></img>
+    <div class="main">
+        <div class="content">
+            <h1>Reading Orders Downloader</h1>
+            <hr>
+            <p>Copy and paste any reading order URL in the box below
+                to download an Excel or CSV file of all the comics in that reading order.
+            </p>
+            <form id="comic-form">
+                <label><strong>Comic URL</strong></label><br>
+                <input type="text" name="input"><br>
+                <input type="submit" name="Excel" value="Download Excel">
+                <input type="submit" name="CSV" value="Download CSV">
+            </form>
+            <br>
+
+            <div id="messages"></div>
+
+            <a href="https://comicbookreadingorders.com">Back to reading orders</a>
+        </div>
+    </div>
+    <footer>
+        <ul>
+            <li> <a class="footer-link" href="https://github.com/jacob-armiger/comic-list-web-scraper" target="blank">Source Code</a></li>
+            <li> <a class="footer-link" href="https://github.com/jacob-armiger" target="blank">Creator</a></li>
+        </ul>
+    </footer>
+
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+    <script src="scraper.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
